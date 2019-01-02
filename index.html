@@ -6,29 +6,29 @@
 
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 <script type="text/javascript" charset="utf-8">
-var onSuccess = function(position) {
-        alert('Latitude: '          + position.coords.latitude          + '\n' +
-              'Longitude: '         + position.coords.longitude         + '\n' +
-              'Altitude: '          + position.coords.altitude          + '\n' +
-              'Accuracy: '          + position.coords.accuracy          + '\n' +
-              'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-              'Heading: '           + position.coords.heading           + '\n' +
-              'Speed: '             + position.coords.speed             + '\n' +
-              'Timestamp: '         + position.timestamp                + '\n');
-    };
 
-    // onError Callback receives a PositionError object
-    //
-    function onError(error) {
-        alert('code: '    + error.code    + '\n' +
-              'message: ' + error.message + '\n');
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    function onDeviceReady() { alert('onDeviceReady Function works');
+        var option = {frequency:500,maximumAge: 0, timeout: 10000, enableHighAccuracy:true};
+        navigator.geolocation.getCurrentPosition(onSuccess, onError, option );
     }
 
-    navigator.geolocation.getCurrentPosition(onSuccess, onError);
-    alert('run completed');
-    </script>
+    function onSuccess(position) { alert("It Works!!!");
+        var element = document.getElementById('geolocation');
+        element.innerHTML = 'Latitude: '  + position.coords.latitude  + '<br />' +
+                            'Longitude: ' + position.coords.longitude;
+    }
+
+    function onError(error) {
+         //alert(error);
+        alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
+    }
+
+ </script>
   </head>
     <body>
     <h1>SMT geo test application</h1>
+      <p id="geolocation">Finding geolocation...</p>
   </body>
 </html>
