@@ -15,7 +15,7 @@
 
     <!-- According to the docs you only need this block -->
     <!-- This plugin provides information about the device's location, such as latitude and longitude. -->
-    <plugin name="cordova-plugin-geolocation" spec="~5">
+    <plugin name="cordova-plugin-geolocation" spec="~4">
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="This app uses your location for maps." />
     </plugin>
 
