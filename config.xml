@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget
+        id="com.example.appname"
+        xmlns="http://www.w3.org/ns/widgets"
+        xmlns:cdv="http://cordova.apache.org/ns/1.0"
+        xmlns:gap="http://phonegap.com/ns/1.0"
+        versionCode="10203"
+        version="1.2.3">
+
+    <name>GeoTest!</name>
+
+    <description>Example cordova configuration for geolocation permissions</description>
+
+    <preference name="phonegap-version" value="cli-8.0.0" />
+
+    <!-- According to the docs you only need this block -->
+    <!-- This plugin provides information about the device's location, such as latitude and longitude. -->
+    <plugin name="cordova-plugin-geolocation" spec="~4">
+        <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="This app uses your location for maps." />
+    </plugin>
+
+    <!-- On iOS you'll get multiple access location prompts with cordova-plugin-geolocation 4.0.1 -->
+    <!-- And the app will not save the access location permisssion in the iOS settings. -->
+    <!-- And on every start of your app it the access location dialog will wil re-appear. -->
+    <!-- It als odoe not show the permission in the required format for the Apple app store. -->
+    <!-- It's probably related to https://issues.apache.org/jira/browse/CB-13680 -->
+    <!-- If you override all the messages the app will show a properly formatted prompt and it will save the settings. -->
+    <platform name="ios">
+        <edit-config target="NSLocationAlwaysAndWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
+            <string>This app uses your location for maps.</string>
+        </edit-config>
+        <edit-config target="NSLocationWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
+            <string>This app uses your location for maps.</string>
+        </edit-config>
+        <edit-config target="NSLocationAlwaysUsageDescription" file="*-Info.plist" mode="merge">
+            <string>This app uses your location for maps.</string>
+        </edit-config>
+    </platform>
+
+    <!-- On Android the cordova-plugin-geolocation version 4.0.1 will not prompt for the geolocation permissions -->
+    <!-- With these permission overrides the app will ask for the fine location permission anyway -->
+    <platform name="android">
+        <uses-permission name="android.permission.ACCESS_COARSE_LOCATION" />
+        <uses-permission name="android.permission.ACCESS_FINE_LOCATION" />
+        <uses-permission name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    </platform>
+
+</widget>
